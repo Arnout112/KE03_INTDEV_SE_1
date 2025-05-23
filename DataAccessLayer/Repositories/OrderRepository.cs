@@ -34,11 +34,18 @@ namespace DataAccessLayer.Repositories
         {
             return _context.Orders.Include(o => o.Customer);
         }
-
         public Order? GetOrderById(int id)
         {
-            return _context.Orders.Include(o => o.Customer).FirstOrDefault(o => o.Id == id);
+            return _context.Orders
+                .Include(o => o.Customer)
+                .Include(o => o.Products) // Needed for the duplicate check to work
+                .FirstOrDefault(o => o.Id == id);
         }
+
+        //public Order? GetOrderById(int id)
+        //{
+        //    return _context.Orders.Include(o => o.Customer).FirstOrDefault(o => o.Id == id);
+        //}
 
         public void UpdateOrder(Order order)
         {

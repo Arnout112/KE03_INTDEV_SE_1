@@ -1,0 +1,61 @@
+﻿@page
+@model KE03_INTDEV_SE_1_Base.Pages.Catalog.IndexModel
+@{
+    ViewData["Title"] = "Product & Part Catalog";
+}
+
+<h1>Product & Part Catalog</h1>
+
+<h2>Products</h2>
+<table class="table">
+    <thead>
+        <tr><th>Name</th><th>Description</th><th>Price</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@product.Price.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!string.IsNullOrEmpty(Model.StatusMessage))
+{
+    <div class="alert alert-info">@Model.StatusMessage</div>
+}
+
+@foreach (var product in Model.Products)
+{
+    <tr>
+        <td>@product.Name</td>
+        <td>@product.Description</td>
+        <td>@product.Price.ToString("C")</td>
+        <td>
+            <form method="post" asp-page-handler="AddToOrder">
+                <input type="hidden" name="productId" value="@product.Id" />
+                <input type="hidden" name="orderId" value="@Model.CurrentOrder.Id" />
+                <button type="submit" class="btn btn-primary">Add to Order</button>
+            </form>
+        </td>
+    </tr>
+}
+
+<h2>Parts</h2>
+<table class="table">
+    <thead>
+        <tr><th>Name</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var part in Model.Parts)
+        {
+            <tr>
+                <td>@part.Name</td>
+                <td>@part.Description</td>
+            </tr>
+        }
+    </tbody>
+</table>
