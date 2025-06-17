@@ -1,0 +1,50 @@
+commit bc9656adb948a5b35455cce78796115ee917c0a9
+Merge: 01d9666 88d9740
+Author: Arnout <85582130+Arnout112@users.noreply.github.com>
+Date:   Thu May 29 13:53:53 2025 +0200
+
+    Merge pull request #1 from Arnout112/feature/privacy
+    
+    Update privacy page
+
+commit 88d9740877e2523eea95969a82d26d5ac2480517
+Author: Arnout112 <arnout.r.t.smit@gmail.com>
+Date:   Thu May 29 13:52:14 2025 +0200
+
+    Update .gitignore
+
+commit 801255220375aa5c99cbc141106464e65680a92b
+Author: Arnout112 <arnout.r.t.smit@gmail.com>
+Date:   Thu May 29 13:44:23 2025 +0200
+
+    Add privacy image
+
+commit 42e783189bbeb6375dff61f97a86f65880542c36
+Author: Arnout112 <arnout.r.t.smit@gmail.com>
+Date:   Tue May 27 11:41:05 2025 +0200
+
+    Update privacy page
+
+commit 01d96660b320db543bb51c54ce0ade7d3b31de93
+Author: Arnout112 <arnout.r.t.smit@gmail.com>
+Date:   Fri May 23 14:52:44 2025 +0200
+
+    Update README.md
+
+commit 46b3bb2b076be103aef1a5dc975106c7a61af5ea
+Author: Arnout112 <arnout.r.t.smit@gmail.com>
+Date:   Fri May 23 14:48:24 2025 +0200
+
+    Add order funcion, product catalog etc.
+
+commit 3257f5c2056ecc472b7381f3a88bbee92cd25496
+Author: Arnout112 <arnout.r.t.smit@gmail.com>
+Date:   Fri May 23 14:47:36 2025 +0200
+
+    Update gitignore
+
+commit 737d3023b7d3c5adbfb18d5130036f2e76a958e7
+Author: Arnout112 <arnout.r.t.smit@gmail.com>
+Date:   Tue May 13 13:46:14 2025 +0200
+
+    Base Commit
