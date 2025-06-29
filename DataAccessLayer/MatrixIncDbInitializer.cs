@@ -36,15 +36,110 @@ namespace DataAccessLayer
 
             var products = new Product[]
             {
-                new Product { Name = "Nebuchadnezzar", Description = "Het schip waarop Neo voor het eerst de echte wereld leert kennen", Price = 10000.00m },
-                new Product { Name = "Jack-in Chair", Description = "Stoel met een rugsteun en metalen armen waarin mensen zitten om ingeplugd te worden in de Matrix via een kabel in de nekpoort", Price = 500.50m },
-                new Product { Name = "EMP (Electro-Magnetic Pulse) Device", Description = "Wapentuig op de schepen van Zion", Price = 129.99m },
-                new Product { Name = "Hovercraft Logos", Description = "Het schip van Niobe, gebruikt door de crew van Zion", Price = 9500.00m },
-                new Product { Name = "Sentinel Drone", Description = "Mechanische vijand die jaagt op menselijke schepen in de echte wereld", Price = 299.99m },
-                new Product { Name = "Construct Training Module", Description = "Virtuele omgeving waarin de crew vechttechnieken en scenario’s oefent", Price = 749.00m },
-                new Product { Name = "Oracle’s Cookie", Description = "Mysterieuze koekje van de Oracle dat meer betekenis heeft dan je denkt", Price = 2.99m },
-                new Product { Name = "Operator Console", Description = "Console waarmee de operator zoals Tank of Link de crew begeleidt", Price = 1200.00m }
-
+                new Product
+                {
+                    Name = "Nebuchadnezzar",
+                    Description = "Het schip waarop Neo voor het eerst de echte wereld leert kennen",
+                    Price = 10000.00m,
+                    ImageUrl = "/img/products/Nebuchadnezzar.webp",
+                    SalePrice = null,
+                    SaleStartDate = null,
+                    SaleEndDate = null,
+                    StockQuantity = 5,
+                    CreatedAt = DateTime.UtcNow.AddDays(-120),
+                    Category = "Hovercraft"
+                },
+                new Product
+                {
+                    Name = "Jack-in Chair",
+                    Description = "Stoel met een rugsteun en metalen armen waarin mensen zitten om ingeplugd te worden in de Matrix via een kabel in de nekpoort",
+                    Price = 500.50m,
+                    ImageUrl = "/img/products/jackinchair.png",
+                    SalePrice = 450.00m,
+                    SaleStartDate = DateTime.UtcNow.AddDays(-10),
+                    SaleEndDate = DateTime.UtcNow.AddDays(10),
+                    StockQuantity = 10,
+                    CreatedAt = DateTime.UtcNow.AddDays(-60),
+                    Category = "Equipment"
+                },
+                new Product
+                {
+                    Name = "EMP (Electro-Magnetic Pulse) Device",
+                    Description = "Wapentuig op de schepen van Zion",
+                    Price = 129.99m,
+                    ImageUrl = "/img/products/emp.png",
+                    SalePrice = 99.99m,
+                    SaleStartDate = DateTime.UtcNow.AddDays(-5),
+                    SaleEndDate = DateTime.UtcNow.AddDays(5),
+                    StockQuantity = 20,
+                    CreatedAt = DateTime.UtcNow.AddDays(-30),
+                    Category = "Weapon"
+                },
+                new Product
+                {
+                    Name = "Hovercraft Logos",
+                    Description = "Het schip van Niobe, gebruikt door de crew van Zion",
+                    Price = 9500.00m,
+                    ImageUrl = "/img/products/zion_defence_turret.jpg",
+                    SalePrice = null,
+                    SaleStartDate = null,
+                    SaleEndDate = null,
+                    StockQuantity = 3,
+                    CreatedAt = DateTime.UtcNow.AddDays(-90),
+                    Category = "Hovercraft"
+                },
+                new Product
+                {
+                    Name = "Sentinel Drone",
+                    Description = "Mechanische vijand die jaagt op menselijke schepen in de echte wereld",
+                    Price = 299.99m,
+                    ImageUrl = "/img/products/sentinel_drone.jpg",
+                    SalePrice = 249.99m,
+                    SaleStartDate = DateTime.UtcNow.AddDays(-2),
+                    SaleEndDate = DateTime.UtcNow.AddDays(8),
+                    StockQuantity = 15,
+                    CreatedAt = DateTime.UtcNow.AddDays(-15),
+                    Category = "Enemy"
+                },
+                new Product
+                {
+                    Name = "Construct Training Module",
+                    Description = "Virtuele omgeving waarin de crew vechttechnieken en scenario’s oefent",
+                    Price = 749.00m,
+                    ImageUrl = "/img/products/onderdeel6.jpeg",
+                    SalePrice = null,
+                    SaleStartDate = null,
+                    SaleEndDate = null,
+                    StockQuantity = 7,
+                    CreatedAt = DateTime.UtcNow.AddDays(-45),
+                    Category = "Simulation"
+                },
+                new Product
+                {
+                    Name = "Oracle’s Cookie",
+                    Description = "Mysterieuze koekje van de Oracle dat meer betekenis heeft dan je denkt",
+                    Price = 2.99m,
+                    ImageUrl = "/img/products/oracle_cookie.webp",
+                    SalePrice = 1.99m,
+                    SaleStartDate = DateTime.UtcNow.AddDays(-1),
+                    SaleEndDate = DateTime.UtcNow.AddDays(14),
+                    StockQuantity = 100,
+                    CreatedAt = DateTime.UtcNow.AddDays(-7),
+                    Category = "Consumable"
+                },
+                new Product
+                {
+                    Name = "Operator Console",
+                    Description = "Console waarmee de operator zoals Tank of Link de crew begeleidt",
+                    Price = 1200.00m,
+                    ImageUrl = "/img/products/operators_console.webp",
+                    SalePrice = null,
+                    SaleStartDate = null,
+                    SaleEndDate = null,
+                    StockQuantity = 4,
+                    CreatedAt = DateTime.UtcNow.AddDays(-80),
+                    Category = "Equipment"
+                }
             };
             context.Products.AddRange(products);
 
