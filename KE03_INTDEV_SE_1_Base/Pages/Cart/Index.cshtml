@@ -1,0 +1,68 @@
+﻿@page
+@model KE03_INTDEV_SE_1_Base.Pages.Cart.IndexModel
+
+@{
+    ViewData["Title"] = "Shopping Cart";
+}
+
+<h1 class="mb-4">Shopping Cart</h1>
+
+@if (!Model.Cart.Items.Any())
+{
+    <div class="alert alert-info">
+        Your cart is empty.
+    </div>
+}
+else
+{
+    <table class="table align-middle">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Product</th>
+                <th class="text-end">Price</th>
+                <th class="text-center">Quantity</th>
+                <th class="text-end">Subtotal</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var cartItem in Model.Cart.Items)
+        {
+            <tr>
+                <td style="width: 80px;">
+                    <img src="@cartItem.Product.ImageUrl" alt="@cartItem.Product" class="img-thumbnail" style="max-height: 64px;" />
+                </td>
+                <td>@cartItem.Product.Name</td>
+                <td class="text-end">€@cartItem.Product.Price.ToString("0.00")</td>
+                <td class="text-center">@cartItem.Quantity</td>
+                <td class="text-end">€@(cartItem.Product.Price * cartItem.Quantity).ToString("0.00")</td>
+                <td class="text-end">
+                    <form method="post" asp-page-handler="Remove">
+                        <input type="hidden" name="productId" value="@cartItem.ProductId" />
+                        <button type="submit" class="btn btn-sm btn-outline-danger">
+                            Remove
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="4" class="text-end">Total:</th>
+                <th class="text-end">€@Model.Cart.Total.ToString("0.00")</th>
+                <th></th>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="d-flex justify-content-between">
+        <a asp-page="/Catalog/Index" class="btn btn-outline-secondary">
+            Continue Shopping
+        </a>
+        <a asp-page="/Checkout/Index" class="btn btn-success">
+            Proceed to Checkout
+        </a>
+    </div>
+}

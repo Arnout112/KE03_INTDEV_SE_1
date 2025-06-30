@@ -25,6 +25,10 @@ namespace KE03_INTDEV_SE_1_Base
             // Add services to the container.
             builder.Services.AddRazorPages();
 
+            // Add session for shopping card logic
+            builder.Services.AddSession();
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -43,6 +47,8 @@ namespace KE03_INTDEV_SE_1_Base
                 context.Database.EnsureCreated();
                 MatrixIncDbInitializer.Initialize(context);
             }
+            
+            app.UseSession();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

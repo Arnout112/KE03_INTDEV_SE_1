@@ -3,6 +3,7 @@ using DataAccessLayer.Models;
 using DataAccessLayer.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace KE03_INTDEV_SE_1_Base.Pages.Catalog
 {
@@ -30,10 +31,21 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Catalog
             Parts = new List<Part>();
         }
 
-        public void OnGet()
+        public void OnGet(string query)
         {
-            Products = _productRepository.GetAllProducts().ToList();
-            Parts = _partRepository.GetAllParts().ToList();
+            //Filter on query
+            if (!string.IsNullOrEmpty(query))
+            {
+                Products = Products = _productRepository.GetAllProducts()
+                    .Where(p => p.Name.ToLower().Contains(query.ToLower()))
+                    .ToList();
+            }
+            else
+            {
+                Products = _productRepository.GetAllProducts().ToList();
+                Parts = _partRepository.GetAllParts().ToList();
+            }
+                
 
             // Get latest order for this customer
             CurrentOrder = _orderRepository.GetAllOrders()
@@ -52,31 +64,31 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Catalog
             _orderRepository.AddOrder(order);
             return order;
         }
-        public IActionResult OnPostAddToOrder(int productId, int orderId)
-        {
-            var order = _orderRepository.GetOrderById(orderId);
-            var product = _productRepository.GetProductById(productId);
+        //public IActionResult OnPostAddToOrder(int productId, int orderId)
+        //{
+        //    var order = _orderRepository.GetOrderById(orderId);
+        //    var product = _productRepository.GetProductById(productId);
 
-            if (order != null && product != null)
-            {
-                if (!order.Products.Any(p => p.Id == product.Id))
-                {
-                    // Prevent duplicate orders
-                    order.Products.Add(product);
-                    _orderRepository.UpdateOrder(order);
-                    StatusMessage = $"✔️ '{product.Name}' was added to your order.";
-                }
-                else
-                {
-                    StatusMessage = $"⚠️ '{product.Name}' is already in your order.";
-                }
-            }
-            else
-            {
-                StatusMessage = $"❌ Unable to add product to the order.";
-            }
+        //    if (order != null && product != null)
+        //    {
+        //        if (!order.Products.Any(p => p.Id == product.Id))
+        //        {
+        //            // Prevent duplicate orders
+        //            order.Products.Add(product);
+        //            _orderRepository.UpdateOrder(order);
+        //            StatusMessage = $"✔️ '{product.Name}' was added to your order.";
+        //        }
+        //        else
+        //        {
+        //            StatusMessage = $"⚠️ '{product.Name}' is already in your order.";
+        //        }
+        //    }
+        //    else
+        //    {
+        //        StatusMessage = $"❌ Unable to add product to the order.";
+        //    }
 
-            return RedirectToPage();
-        }
+        //    return RedirectToPage();
+        //}
     }
 }

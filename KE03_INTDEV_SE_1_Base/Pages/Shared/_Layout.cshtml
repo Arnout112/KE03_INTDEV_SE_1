@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - KE03_INTDEV_SE_1_Base</title>
     @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
 	<link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     @* <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> *@
     @* <link rel="stylesheet" href="~/KE03_INTDEV_SE_1_Base.styles.css" asp-append-version="true" /> *@
 </head>
@@ -13,7 +14,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">KE03_INTDEV_SE_1_Base</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">Matrix Inc.</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -29,8 +30,23 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Orders/Index">Orders</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark d-flex align-items-center" asp-page="/Cart/Index">
+                                <i class="bi bi-cart" style="font-size: 1.2rem;"></i>
+                                <span class="ms-1">Cart</span>
+                                @await Component.InvokeAsync("CartCount")
+                            </a>
+                        </li>
+
+                    
+
+                    <form class="d-flex" asp-page="/Catalog/Index" method="get">
+                        <input class="form-control me-2" type="search" placeholder="Search products..." aria-label="Search" name="query">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
                     </ul>
                 </div>
+
             </div>
         </nav>
     </header>

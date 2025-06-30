@@ -35,6 +35,11 @@
         <td>@product.Description</td>
         <td>@product.Price.ToString("C")</td>
         <td>
+            <a asp-page="ProductDetails" asp-route-id="@product.Id" class="btn btn-primary">
+                View Details
+            </a>
+        </td>
+        <td>
             <form method="post" asp-page-handler="AddToOrder">
                 <input type="hidden" name="productId" value="@product.Id" />
                 <input type="hidden" name="orderId" value="@Model.CurrentOrder.Id" />

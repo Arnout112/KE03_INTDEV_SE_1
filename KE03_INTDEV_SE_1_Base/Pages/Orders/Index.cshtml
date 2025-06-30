@@ -19,6 +19,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Order[0].Customer)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order[0].Items)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -29,8 +32,16 @@
                 @Html.DisplayFor(modelItem => item.OrderDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Customer.Address)
+                @Html.DisplayFor(modelItem => item.Customer.Name)
             </td>
+            <th>
+                @* @Html.DisplayFor(modelItem => item.Products.Name) *@
+                @foreach (var orderItem in item.Items)
+                {
+                        @Html.DisplayFor(modelItem => orderItem.Product.Name);
+
+                }
+            </th>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |

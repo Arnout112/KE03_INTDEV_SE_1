@@ -24,6 +24,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Orders
         public async Task OnGetAsync()
         {
             Order = await _context.Orders
+                .Include(o => o.Items)
                 .Include(o => o.Customer).ToListAsync();
         }
     }

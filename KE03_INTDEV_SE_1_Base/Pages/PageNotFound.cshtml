@@ -1,0 +1,31 @@
+﻿@page
+@model KE03_INTDEV_SE_1_Base.Pages.PageNotFoundModel
+@{
+    ViewData["Title"] = "Onder Constructie";
+}
+
+<style>
+    .onder-constructie-container {
+        min-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .onder-constructie-title {
+        font-size: 2.8rem;
+        text-align: center;
+        margin-bottom: 24px;
+    }
+    .onder-constructie-image {
+        max-width: 350px;
+        width: 100%;
+        margin-top: 10px;
+        display: block;
+    }
+</style>
+
+<div class="onder-constructie-container">
+    <h1 class="onder-constructie-title">Deze pagina is nog onder constructie</h1>
+    <img src="@Url.Content("~/img/under_construction.png")" alt="Onder constructie" class="onder-constructie-image" />
+</div>

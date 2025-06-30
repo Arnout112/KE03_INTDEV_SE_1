@@ -38,7 +38,7 @@ namespace DataAccessLayer.Repositories
         {
             return _context.Orders
                 .Include(o => o.Customer)
-                .Include(o => o.Products) // Needed for the duplicate check to work
+                .Include(o => o.Items)
                 .FirstOrDefault(o => o.Id == id);
         }
 
