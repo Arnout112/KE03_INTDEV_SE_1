@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 namespace DataAccessLayer.Models
 {
     public class Product
-    {        
+    {
         public int Id { get; set; }
 
         public string Name { get; set; }
 
         public string Description { get; set; }
         public string? ImageUrl { get; set; } = string.Empty;
-        
+
         [DataType(DataType.Currency)]
         [Range(0.01, double.MaxValue, ErrorMessage = "Price must be greater than zero.")]
         public decimal Price { get; set; }
@@ -44,6 +44,19 @@ namespace DataAccessLayer.Models
                 return SalePrice.HasValue && SaleStartDate.HasValue && SaleEndDate.HasValue && (SaleStartDate <= now) && (SaleEndDate >= now);
             }
         }
-
+        public decimal CurrentPrice
+        {
+            get
+            {
+                if (IsOnSale)
+                {
+                    return SalePrice.Value;
+                }
+                else
+                {
+                    return Price;
+                }
+            }           
+        }
     }
 }

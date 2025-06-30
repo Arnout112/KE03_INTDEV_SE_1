@@ -25,6 +25,7 @@
                <h3 class="text-success mb-3">€@Model.Product.Price.ToString("0.00")</h3>
             }
             <p>@Model.Product.Description</p>
+            <p>Category: @Model.Product.Category</p>
 
             <form method="post" asp-page-handler="AddToCart">
                 <input type="hidden" name="productId" value="@Model.Product.Id" />

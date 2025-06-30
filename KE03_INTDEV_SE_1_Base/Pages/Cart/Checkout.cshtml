@@ -51,14 +51,14 @@
                     <tr>
                         <td>@item.Product.Name</td>
                         <td class="text-end">@item.Quantity</td>
-                        <td class="text-end">€@((item.Product.Price * item.Quantity).ToString("0.00"))</td>
+                        <td class="text-end">€@((item.Product.CurrentPrice * item.Quantity).ToString("0.00"))</td>
                     </tr>
                 }
             </tbody>
             <tfoot>
                 <tr>
                     <th colspan="2" class="text-end">Total:</th>
-                    <th class="text-end">€@Model.Cart.Items.Sum(i => i.Product.Price * i.Quantity).ToString("0.00")</th>
+                    <th class="text-end">€@Model.Cart.Items.Sum(i => i.Product.CurrentPrice * i.Quantity).ToString("0.00")</th>
                 </tr>
             </tfoot>
         </table>

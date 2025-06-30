@@ -6,7 +6,7 @@ namespace KE03_INTDEV_SE_1_Base.Models
     {
         public int Id { get; set; }
         public List<CartItem> Items { get; set; } = new List<CartItem>();
-        public decimal Total => Items.Sum(item => item.Product.Price * item.Quantity);
+        public decimal Total => Items.Sum(item => item.Product.CurrentPrice * item.Quantity);
 
     }
     public class CartItem

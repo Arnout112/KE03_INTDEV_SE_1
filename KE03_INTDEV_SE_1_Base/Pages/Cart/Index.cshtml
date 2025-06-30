@@ -34,7 +34,9 @@ else
                     <img src="@cartItem.Product.ImageUrl" alt="@cartItem.Product" class="img-thumbnail" style="max-height: 64px;" />
                 </td>
                 <td>@cartItem.Product.Name</td>
-                <td class="text-end">€@cartItem.Product.Price.ToString("0.00")</td>
+
+                <td class="text-end">€@cartItem.Product.CurrentPrice.ToString("0.00");</td>
+                
                 <td class="text-end">
                     <form method="post" asp-page-handler="UpdateQuantity" class="d-flex align-items-center justify-content-center">
                         <input type="hidden" name="productId" value="@cartItem.Product.Id" />
@@ -47,7 +49,7 @@ else
                         <button type="submit" class="btn btn-primary btn-sm ms-2">Update</button>
                     </form>
                 </td>
-                <td class="text-end">€@((cartItem.Product.Price * cartItem.Quantity).ToString("0.00"))</td>
+                <td class="text-end">€@((cartItem.Product.CurrentPrice * cartItem.Quantity).ToString("0.00"))</td>
                 <td class="text-end">
                     <form method="post" asp-page-handler="Remove">
                         <input type="hidden" name="productId" value="@cartItem.ProductId" />
