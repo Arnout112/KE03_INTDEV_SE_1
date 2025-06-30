@@ -31,6 +31,7 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Orders
             var order = await _context.Orders
                 .Include(o => o.Customer)
                 .Include(o => o.Items)
+                .ThenInclude(i => i.Product)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (order == null)
             {

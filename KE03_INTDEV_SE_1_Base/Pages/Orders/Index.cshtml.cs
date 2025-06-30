@@ -25,6 +25,8 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Orders
         {
             Order = await _context.Orders
                 .Include(o => o.Products)
+                .Include(o => o.Items)
+                .ThenInclude(i => i.Product)
                 .Include(o => o.Customer).ToListAsync();
         }
     }

@@ -1,4 +1,6 @@
+using DataAccessLayer.Interfaces;
 using DataAccessLayer.Models;
+using DataAccessLayer.Repositories;
 using KE03_INTDEV_SE_1_Base.Helpers;
 using KE03_INTDEV_SE_1_Base.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -15,13 +17,19 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Cart
         public OrderInputModel Order { get; set; }
 
         public Models.Cart Cart { get; set; }
+        private readonly IOrderRepository _orderRepository;
+
+        public CheckoutModel(IOrderRepository orderRepository)
+        {
+            _orderRepository = orderRepository;
+        }
 
         public void OnGet()
         {
             Cart = HttpContext.Session.GetObject<Models.Cart>("Cart") ?? new Models.Cart();
         }
         //async Task<IActionResult>
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
             Cart = HttpContext.Session.GetObject<Models.Cart>("Cart") ?? new Models.Cart();
 
@@ -64,9 +72,11 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Cart
                     Quantity = cartItem.Quantity,
                     UnitPrice = cartItem.Product.Price
                 });
+                //order.Products.Add(cartItem.Product);
             }
 
             // Add to DbContext and save
+            _orderRepository.AddOrder(order);
             //_context.Orders.Add(order);
             //await _context.SaveChangesAsync();
 

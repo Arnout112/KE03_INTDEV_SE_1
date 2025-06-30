@@ -17,7 +17,7 @@ namespace KE03_INTDEV_SE_1_Base.ViewComponents
             // Return raw HTML string instead of a separate view file
             return Task.FromResult<IViewComponentResult>(
                 new HtmlContentViewComponentResult(
-                    new HtmlString($"<span class=\"badge bg-primary\">{count}</span>")
+                    new HtmlString($"<span class=\"badge bg-primary ms-1\">{count}</span>")
                 )
             );
         }

@@ -35,10 +35,15 @@
                 @Html.DisplayFor(modelItem => item.Customer.Name)
             </td>
             <th>
-                @* @Html.DisplayFor(modelItem => item.Products.Name) *@
-                @foreach (var product in item.Items)
+                @* @foreach (var product in item.Products)
                 {
-                        @Html.DisplayFor(modelItem => product.Product.Name);
+                    @Html.DisplayFor(modelItem => product.Name)
+
+                } *@
+                
+                @foreach (var orderItem in item.Items)
+                {
+                    @Html.DisplayFor(modelItem => orderItem.Product.Name);
 
                 }
             </th>
