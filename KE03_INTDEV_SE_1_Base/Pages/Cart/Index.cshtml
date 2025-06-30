@@ -35,8 +35,19 @@ else
                 </td>
                 <td>@cartItem.Product.Name</td>
                 <td class="text-end">€@cartItem.Product.Price.ToString("0.00")</td>
-                <td class="text-center">@cartItem.Quantity</td>
-                <td class="text-end">€@(cartItem.Product.Price * cartItem.Quantity).ToString("0.00")</td>
+                <td class="text-end">
+                    <form method="post" asp-page-handler="UpdateQuantity" class="d-flex align-items-center justify-content-center">
+                        <input type="hidden" name="productId" value="@cartItem.Product.Id" />
+                        <input type="number"
+                                name="quantity"
+                                value="@cartItem.Quantity"
+                                min="0"
+                                class="form-control form-control-sm"
+                                style="width: 70px;" />
+                        <button type="submit" class="btn btn-primary btn-sm ms-2">Update</button>
+                    </form>
+                </td>
+                <td class="text-end">€@((cartItem.Product.Price * cartItem.Quantity).ToString("0.00"))</td>
                 <td class="text-end">
                     <form method="post" asp-page-handler="Remove">
                         <input type="hidden" name="productId" value="@cartItem.ProductId" />
@@ -61,7 +72,7 @@ else
         <a asp-page="/Catalog/Index" class="btn btn-outline-secondary">
             Continue Shopping
         </a>
-        <a asp-page="/Checkout/Index" class="btn btn-success">
+        <a asp-page="Checkout" class="btn btn-success">
             Proceed to Checkout
         </a>
     </div>

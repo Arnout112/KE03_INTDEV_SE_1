@@ -33,7 +33,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark d-flex align-items-center" asp-page="/Cart/Index">
                                 <i class="bi bi-cart" style="font-size: 1.2rem;"></i>
-                                <span class="ms-1">Cart</span>
+                                <span class="ms-1">Cart </span>
                                 @await Component.InvokeAsync("CartCount")
                             </a>
                         </li>
@@ -51,6 +51,15 @@
         </nav>
     </header>
     <div class="container">
+        <div class="container mt-3">
+            @if (TempData["OrderSuccess"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    @TempData["OrderSuccess"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+        </div>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

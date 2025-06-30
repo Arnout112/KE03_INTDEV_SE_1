@@ -40,6 +40,10 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Cart
                 {
                     cart.Items.Remove(item);
                 }
+                else
+                {
+                    item.Quantity = quantity;
+                }
             }
 
             HttpContext.Session.SetObject("Cart", cart);

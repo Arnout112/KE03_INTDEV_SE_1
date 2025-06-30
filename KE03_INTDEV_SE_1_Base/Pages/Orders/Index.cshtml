@@ -36,9 +36,9 @@
             </td>
             <th>
                 @* @Html.DisplayFor(modelItem => item.Products.Name) *@
-                @foreach (var orderItem in item.Items)
+                @foreach (var product in item.Items)
                 {
-                        @Html.DisplayFor(modelItem => orderItem.Product.Name);
+                        @Html.DisplayFor(modelItem => product.Product.Name);
 
                 }
             </th>

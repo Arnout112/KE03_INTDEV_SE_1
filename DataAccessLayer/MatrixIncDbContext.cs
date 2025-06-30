@@ -26,6 +26,10 @@ namespace DataAccessLayer
             //    .WithMany(c => c.Orders)
             //    .OnDelete(DeleteBehavior.Restrict);
 
+            //modelBuilder.Entity<Order.OrderItem>()
+            //    .HasOne(o => o.Product);
+                
+
             modelBuilder.Entity<Product>()
                 .HasMany(p => p.Orders)
                 .WithMany(o => o.Products);

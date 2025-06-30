@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -77,16 +78,16 @@ namespace DataAccessLayer
                 },
                 new Product
                 {
-                    Name = "Hovercraft Logos",
-                    Description = "Het schip van Niobe, gebruikt door de crew van Zion",
+                    Name = "Zion defence turret",
+                    Description = "De defence turrets van Zion, gebruikt om de oorlog van de machines te winnen",
                     Price = 9500.00m,
-                    ImageUrl = "/img/products/zion_defence_turret.jpg",
+                    ImageUrl = "/img/products/zion_defense_turret.jpg",
                     SalePrice = null,
                     SaleStartDate = null,
                     SaleEndDate = null,
                     StockQuantity = 3,
                     CreatedAt = DateTime.UtcNow.AddDays(-90),
-                    Category = "Hovercraft"
+                    Category = "Weapon"
                 },
                 new Product
                 {

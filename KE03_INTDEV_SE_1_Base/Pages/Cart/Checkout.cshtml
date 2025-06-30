@@ -1,0 +1,70 @@
+﻿@page
+@model KE03_INTDEV_SE_1_Base.Pages.Cart.CheckoutModel
+
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<h1>Checkout</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <h4>Shipping Information</h4>
+        <form method="post">
+            <div class="mb-3">
+                <label asp-for="Order.Name" class="form-label"></label>
+                <input asp-for="Order.Name" class="form-control" />
+                <span asp-validation-for="Order.Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Order.Address" class="form-label"></label>
+                <input asp-for="Order.Address" class="form-control" />
+                <span asp-validation-for="Order.Address" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Order.City" class="form-label"></label>
+                <input asp-for="Order.City" class="form-control" />
+                <span asp-validation-for="Order.City" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Order.Email" class="form-label"></label>
+                <input asp-for="Order.Email" class="form-control" />
+                <span asp-validation-for="Order.Email" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-success">Place Order</button>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <h4>Order Summary</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th class="text-end">Quantity</th>
+                    <th class="text-end">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Cart.Items)
+                {
+                    <tr>
+                        <td>@item.Product.Name</td>
+                        <td class="text-end">@item.Quantity</td>
+                        <td class="text-end">€@((item.Product.Price * item.Quantity).ToString("0.00"))</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="2" class="text-end">Total:</th>
+                    <th class="text-end">€@Model.Cart.Items.Sum(i => i.Product.Price * i.Quantity).ToString("0.00")</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
