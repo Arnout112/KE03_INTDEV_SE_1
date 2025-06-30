@@ -30,7 +30,8 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Catalog
 
             return Page();
         }
-
+        // TODO: check if quantity does not exceed stock
+        // TODO: reserve stock for the product when adding to cart
         public IActionResult OnPostAddToCart(int productId, int quantity = 1)
         {
             var product = _context.Products.FirstOrDefault(p => p.Id == productId);

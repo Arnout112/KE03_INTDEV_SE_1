@@ -19,10 +19,11 @@ namespace KE03_INTDEV_SE_1_Base.Pages
             Customers = new List<Customer>();
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {            
             Customers = _customerRepository.GetAllCustomers().ToList();                            
             _logger.LogInformation($"getting all {Customers.Count} customers");
+            return RedirectToPage("/Catalog/Index"); // Redirect to the Catalog page
         }
     }
 }

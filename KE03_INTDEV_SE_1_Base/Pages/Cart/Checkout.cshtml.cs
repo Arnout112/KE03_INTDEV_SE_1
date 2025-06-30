@@ -44,8 +44,8 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Cart
                 return Page();
             }
 
-            // TODO:if user is not logged in, make new user with contact details
-            //
+            // TODO:if user is logged in, don't ask for contact details
+
             // save the order to the database
 
             var customer = new Customer
@@ -72,7 +72,6 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Cart
                     Quantity = cartItem.Quantity,
                     UnitPrice = cartItem.Product.Price
                 });
-                //order.Products.Add(cartItem.Product);
             }
 
             // Add to DbContext and save

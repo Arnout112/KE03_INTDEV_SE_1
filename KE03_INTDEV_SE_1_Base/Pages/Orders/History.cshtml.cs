@@ -18,14 +18,12 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Orders
 
         public async Task OnGetAsync()
         {
-            // TODO: Replace with actual user identification logic, e.g. User.Identity.Name or user ID
-            //string currentUserEmail = User.Identity.Name;
+            // TODO: Ad user identification logic (e.g. User.Identity.Name or user ID)
 
             Orders = await _context.Orders
                 .Include(o => o.Items)
                 .ThenInclude(i => i.Product)
                 .Include(o => o.Customer)
-                //.Where(o => o.Email == currentUserEmail)
                 .OrderByDescending(o => o.OrderDate)
                 .ToListAsync();
         }
