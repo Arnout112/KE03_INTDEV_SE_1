@@ -21,13 +21,15 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Orders
 
         public IList<Order> Order { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public async Task<RedirectToPageResult> OnGetAsync()
         {
             Order = await _context.Orders
                 .Include(o => o.Products)
                 .Include(o => o.Items)
                 .ThenInclude(i => i.Product)
                 .Include(o => o.Customer).ToListAsync();
+
+            return RedirectToPage("/Catalog/Index");
         }
     }
 }

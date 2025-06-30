@@ -36,5 +36,14 @@ namespace DataAccessLayer.Models
         public ICollection<Part> Parts { get; } = new List<Part>();
         //public ICollection<Category> Category { get; } = new List<Category>();
 
+        public bool IsOnSale
+        {
+            get
+            {
+                var now = DateTime.UtcNow;
+                return SalePrice.HasValue && SaleStartDate.HasValue && SaleEndDate.HasValue && (SaleStartDate <= now) && (SaleEndDate >= now);
+            }
+        }
+
     }
 }

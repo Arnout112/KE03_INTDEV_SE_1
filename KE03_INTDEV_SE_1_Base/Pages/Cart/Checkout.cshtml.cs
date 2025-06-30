@@ -77,16 +77,11 @@ namespace KE03_INTDEV_SE_1_Base.Pages.Cart
 
             // Add to DbContext and save
             _orderRepository.AddOrder(order);
-            //_context.Orders.Add(order);
-            //await _context.SaveChangesAsync();
-
-
-
 
             HttpContext.Session.Remove("Cart");
 
             TempData["OrderSuccess"] = "Thank you! Your order has been placed.";
-            return RedirectToPage("/Index");
+            return RedirectToPage("/Catalog/Index");
         }
 
         public class OrderInputModel

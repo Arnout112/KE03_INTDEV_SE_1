@@ -13,7 +13,17 @@
         <div class="col-md-6">
             <h1 class="display-5">@Model.Product.Name</h1>
             <p class="text-muted">Product ID: @Model.Product.Id</p>
-            <h3 class="text-success mb-3">€@Model.Product.Price.ToString("0.00")</h3>
+            @if (@Model.Product.IsOnSale)
+            {
+                <p class="card-text">
+                    <span class="text-danger text-decoration-line-through">€@Model.Product.Price.ToString("0.00")</span>
+                    <h3 class="text-success mb-3">€@Model.Product.SalePrice.Value.ToString("0.00")</h3>
+                </p>
+            }
+            else
+            {
+               <h3 class="text-success mb-3">€@Model.Product.Price.ToString("0.00")</h3>
+            }
             <p>@Model.Product.Description</p>
 
             <form method="post" asp-page-handler="AddToCart">

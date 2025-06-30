@@ -1,94 +1,93 @@
-﻿using DataAccessLayer.Interfaces;
+﻿using DataAccessLayer;
+using DataAccessLayer.Interfaces;
 using DataAccessLayer.Models;
-using DataAccessLayer.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace KE03_INTDEV_SE_1_Base.Pages.Catalog
 {
     public class IndexModel : PageModel
     {
-        private readonly IProductRepository _productRepository;
-        private readonly IPartRepository _partRepository;
-        private readonly IOrderRepository _orderRepository;
-        private readonly int _hardcodedCustomerId = 1; // Replace with real identity later
+        private readonly MatrixIncDbContext _context;
 
-        [TempData]
-        public string? StatusMessage { get; set; }
-
-        public Order CurrentOrder { get; set; } = new();
-
-        public List<Product> Products { get; set; }
-        public List<Part> Parts { get; set; }
-
-        public IndexModel(IProductRepository productRepository, IPartRepository partRepository, IOrderRepository orderRepository)
+        public IndexModel(MatrixIncDbContext context)
         {
-            _productRepository = productRepository;
-            _partRepository = partRepository;
-            _orderRepository = orderRepository;
-            Products = new List<Product>();
-            Parts = new List<Part>();
+            _context = context;
         }
 
-        public void OnGet(string query)
+        public List<Product> Products { get; set; } = new();
+
+        [BindProperty(SupportsGet = true)]
+        public string? Layout { get; set; } // "grid" or "table"
+        public string? Query { get; set; } // Search query
+
+        public async Task OnGetAsync(string? query)
         {
             //Filter on query
             if (!string.IsNullOrEmpty(query))
             {
-                Products = Products = _productRepository.GetAllProducts()
+                Products = await _context.Products
                     .Where(p => p.Name.ToLower().Contains(query.ToLower()))
-                    .ToList();
+                    .ToListAsync();
+                Query = query; // Preserve the query for the view
             }
             else
             {
-                Products = _productRepository.GetAllProducts().ToList();
-                Parts = _partRepository.GetAllParts().ToList();
+                Products = await _context.Products.ToListAsync();
             }
-                
 
-            // Get latest order for this customer
-            CurrentOrder = _orderRepository.GetAllOrders()
-                .Where(o => o.CustomerId == _hardcodedCustomerId)
-                .OrderByDescending(o => o.OrderDate)
-                .FirstOrDefault() ?? CreateInitialOrder();
-        }
-        private Order CreateInitialOrder()
-        {
-            var order = new Order
+            // default to "grid" if invalid
+            if (Layout != "table" && Layout != "grid")
             {
-                CustomerId = _hardcodedCustomerId,
-                OrderDate = DateTime.UtcNow
-            };
-
-            _orderRepository.AddOrder(order);
-            return order;
+                Layout = "grid";
+            }
         }
-        //public IActionResult OnPostAddToOrder(int productId, int orderId)
-        //{
-        //    var order = _orderRepository.GetOrderById(orderId);
-        //    var product = _productRepository.GetProductById(productId);
 
-        //    if (order != null && product != null)
+        //private readonly IProductRepository _productRepository;
+        //private readonly IPartRepository _partRepository;
+        //private readonly IOrderRepository _orderRepository;
+        //private readonly int _hardcodedCustomerId = 1; // Replace with real identity later
+
+        //[TempData]
+        //public string? StatusMessage { get; set; }
+
+        //public Order CurrentOrder { get; set; } = new();
+
+        //public List<Product> Products { get; set; }
+        //public List<Part> Parts { get; set; }
+
+        //public IndexModel(IProductRepository productRepository, IPartRepository partRepository, IOrderRepository orderRepository)
+        //{
+        //    _productRepository = productRepository;
+        //    _partRepository = partRepository;
+        //    _orderRepository = orderRepository;
+        //    Products = new List<Product>();
+        //    Parts = new List<Part>();
+        //}
+
+        //public void OnGet(string query)
+        //{
+        //    //Filter on query
+        //    if (!string.IsNullOrEmpty(query))
         //    {
-        //        if (!order.Products.Any(p => p.Id == product.Id))
-        //        {
-        //            // Prevent duplicate orders
-        //            order.Products.Add(product);
-        //            _orderRepository.UpdateOrder(order);
-        //            StatusMessage = $"✔️ '{product.Name}' was added to your order.";
-        //        }
-        //        else
-        //        {
-        //            StatusMessage = $"⚠️ '{product.Name}' is already in your order.";
-        //        }
+        //        Products = Products = _productRepository.GetAllProducts()
+        //            .Where(p => p.Name.ToLower().Contains(query.ToLower()))
+        //            .ToList();
         //    }
         //    else
         //    {
-        //        StatusMessage = $"❌ Unable to add product to the order.";
+        //        Products = _productRepository.GetAllProducts().ToList();
+        //        Parts = _partRepository.GetAllParts().ToList();
         //    }
 
-        //    return RedirectToPage();
+
+        //    // Get latest order for this customer
+        //    CurrentOrder = _orderRepository.GetAllOrders()
+        //        .Where(o => o.CustomerId == _hardcodedCustomerId)
+        //        .OrderByDescending(o => o.OrderDate)
+        //        .FirstOrDefault() ?? CreateInitialOrder();
         //}
     }
 }

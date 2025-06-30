@@ -59,6 +59,12 @@ namespace KE03_INTDEV_SE_1_Base
 
             app.MapRazorPages();
 
+            app.MapGet("/", context =>
+            {
+                context.Response.Redirect("/Catalog");
+                return Task.CompletedTask;
+            });
+
             app.Run();
         }
     }
